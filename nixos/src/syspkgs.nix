@@ -3,6 +3,9 @@
   config,
 	...
 } : {
+	environment.sessionVariables = {
+		LIBVA_DRIVER_NAME = "i965";
+	};
 	environment.systemPackages = with pkgs; [
 		# home manager
 		home-manager
@@ -13,6 +16,13 @@
 		brightnessctl
 		pulseaudio
 		direnv
+		aha
+		fwupd-efi
+		pciutils
+		clinfo
+		glxinfo
+		vulkan-tools
+		wayland-utils
 		# driver
 		maschine-mikro-mk3-driver
 		spice-vdagent
@@ -41,9 +51,22 @@
 		nano
 		# Custom packages
 		(sddm-theme.override {
+			variants = [ "qt6" ];
 			themeConfig.General = {
-				background = "${config.stylix.image}";
-				backgroundMode = "none";
+				# background = "${config.stylix.image}";
+				# backgroundMode = "none";
+				ScreenWidth="1920";
+				ScreenHeight="1080";
+				Font="Open Sans";
+				KeyboardSize="0.4";
+				RoundCorners="20";
+				HourFormat="HH:mm";
+				DateFormat="dddd d MMMM";
+				HeaderText="-- Testing Machine 42 --";
+				DimBackground="0.0";
+				CropBackground="true";
+				Background = "${config.stylix.image}";
+				BackgroundHorizontalAlignment="center";
 			};
 		})
 	];

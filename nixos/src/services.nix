@@ -7,22 +7,21 @@
 	excludePackages = with pkgs; [
 		xterm
 	];
-    videoDrivers = [ "virgl" ];
+    videoDrivers = [ "i915" ];
     xkb = {
       variant = "";
       layout = "us";
     };
   };
   services.displayManager = {
-	sddm = {
+	  sddm = {
    		enable = true;
-   		theme = "sddm_theme_qt5";
+   		theme = "sddm_theme_qt6";
    		wayland.enable = true;
   	};
-	autoLogin = {
-		enable = true;
-		user = "tjukmong";
-	};
+  };
+  services.desktopManager.plasma6 = {
+    enable = true;
   };
   services.usbmuxd = {
     enable = true;
@@ -54,9 +53,8 @@
       # PasswordAuthentication = false;
     };
   };
-  services.spice-vdagentd.enable = true;
-  services.qemuGuest.enable = true;
   services.dbus.packages = with pkgs; [ libsForQt5.kpmcore ];
+  services.fwupd.enable = true;
   services.avahi = {
     enable = true;
     nssmdns4 = true;

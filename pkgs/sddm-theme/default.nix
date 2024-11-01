@@ -22,7 +22,7 @@
 }:
 
 let
-  user-cfg = (formats.ini { }).generate "theme.conf.user" themeConfig;
+  user-cfg = (formats.ini { }).generate "theme.conf" themeConfig;
   validVariants = [
     "qt5"
     "qt6"
@@ -32,16 +32,28 @@ in
 lib.checkListOfEnum "sddm_theme: variant" validVariants variants
 
   stdenvNoCC.mkDerivation
+  # (finalAttrs: {
+  #   pname = "sddm_theme";
+  #   version = "6726b5e";
+
+  #   src = fetchFromGitHub {
+  #     owner = "totoro-ghost";
+  #     repo = "sddm-astronaut";
+  #     # rev = "refs/tags/v${finalAttrs.version}";
+	#   rev = "6726b5e";
+	#   hash = "sha256-j8pJvBml2LWxXNw1e/cSVXV+6w+K1lahv0uK1B9OYn0=";
+  #   };
+
   (finalAttrs: {
     pname = "sddm_theme";
-    version = "6726b5e";
+    version = "8993670";
 
     src = fetchFromGitHub {
-      owner = "totoro-ghost";
-      repo = "sddm-astronaut";
+      owner = "Keyitdev";
+      repo = "sddm-astronaut-theme";
       # rev = "refs/tags/v${finalAttrs.version}";
-	  rev = "6726b5e";
-	  hash = "sha256-j8pJvBml2LWxXNw1e/cSVXV+6w+K1lahv0uK1B9OYn0=";
+      rev = "8993670";
+      hash = "sha256-uEZX5J9uhPKakVFnjfzxjOvrvk4F4CNXthkIYroITl4=";
     };
 
     propagatedUserEnvPkgs =
@@ -52,37 +64,24 @@ lib.checkListOfEnum "sddm_theme: variant" validVariants variants
         qt6.qtsvg
       ];
 
-#    installPhase =
-#      ''
-#        mkdir -p $out/share/sddm/themes/
-#      ''
-#      + lib.optionalString (lib.elem "qt6" variants) (
-#        ''
-#          cp -r where_is_my_sddm_theme/ $out/share/sddm/themes/sddm_theme
-#        ''
-#        + lib.optionalString (lib.isAttrs themeConfig) ''
-#          ln -sf ${user-cfg} $out/share/sddm/themes/sddm_theme/theme.conf.user
-#        ''
-#      )
-#      + lib.optionalString (lib.elem "qt5" variants) (
-#        ''
-#          cp -r where_is_my_sddm_theme_qt5/ $out/share/sddm/themes/sddm_theme_qt5
-#        ''
-#        + lib.optionalString (lib.isAttrs themeConfig) ''
-#          ln -sf ${user-cfg} $out/share/sddm/themes/sddm_theme_qt5/theme.conf.user
-#        ''
-#      );
-
 	installPhase =
-	''
-		mkdir -p $out/share/sddm/themes/sddm_theme_qt5
-	''
-      + lib.optionalString (lib.elem "qt5" variants) (
+	      lib.optionalString (lib.elem "qt5" variants) (
         ''
+		      mkdir -p $out/share/sddm/themes/sddm_theme_qt5
           cp -r * $out/share/sddm/themes/sddm_theme_qt5
         ''
         + lib.optionalString (lib.isAttrs themeConfig) ''
-          ln -sf ${user-cfg} $out/share/sddm/themes/sddm_theme_qt5/theme.conf.user
+          # ln -sf ${user-cfg} $out/share/sddm/themes/sddm_theme_qt5/theme.conf.user
+          ln -sf ${user-cfg} $out/share/sddm/themes/sddm_theme_qt5/Themes/theme1.conf
+        ''
+      ) + lib.optionalString (lib.elem "qt6" variants) (
+        ''
+		      mkdir -p $out/share/sddm/themes/sddm_theme_qt6
+          cp -r * $out/share/sddm/themes/sddm_theme_qt6
+        ''
+        + lib.optionalString (lib.isAttrs themeConfig) ''
+          # ln -sf ${user-cfg} $out/share/sddm/themes/sddm_theme_qt6/theme.conf.user
+          ln -sf ${user-cfg} $out/share/sddm/themes/sddm_theme_qt6/Themes/theme1.conf
         ''
       );
 

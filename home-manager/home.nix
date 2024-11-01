@@ -4,7 +4,7 @@
 	# inputs,
 	outputs,
 	# lib,
-	# config,
+	config,
 	pkgs,
 	...
 }: {
@@ -20,7 +20,7 @@
 		# ./nvim.nix
 		./src/stylix.nix
 		./src/stylix-home.nix
-		./src/hyprland.nix
+		# ./src/hyprland.nix
 		./src/programs.nix
 		./src/systemd.nix
 		./src/environment.nix
@@ -53,8 +53,8 @@
 
 	# TODO: Set your username
 	home = {
-		username = "tjukmong";
-		homeDirectory = "/home/tjukmong";
+		username = "bocal";
+		homeDirectory = "/home/bocal";
 	};
 
 	# Add stuff for your user as you see fit:
@@ -64,25 +64,26 @@
 	home.packages = with pkgs; [
 		# Util
 		fastfetch
-		waybar
-		rofi-wayland
-		rofi-bluetooth
-		hyprpaper
+		# waybar
+		# rofi-wayland
+		# rofi-bluetooth
+		# hyprpaper
+		xwaylandvideobridge
 		btop
 		# hyprnome ???
-		hyprpicker
-		hyprshot
-		wleave
+		# hyprpicker
+		# hyprshot
+		# wleave
 		wl-clipboard
 		cliphist
 		# File management
 		dolphin
 		ark
 		# Editors
-		# Media
+		# Internet - Media
+		vesktop
+		firefox
 		irssi-v123
-		# wireshark-qt
-		termshark
 		# Fonts
 		(nerdfonts.override {
 			fonts = [ "Hack" "FiraCode" ];
@@ -91,6 +92,12 @@
 		noto-fonts-cjk
 		noto-fonts-emoji
 	];
+
+	home.file = {
+		"${config.home.homeDirectory}/.face" = {
+			source = "${../assets/user/profile}";
+		};
+	};
 
 	gtk = {
 		enable = true;

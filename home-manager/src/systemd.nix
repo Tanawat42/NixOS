@@ -10,7 +10,7 @@
       Description = "Policy kit for superuser privilage authentication.";
     };
     Install = {
-      WantedBy = [ "default.target" ];
+      WantedBy = [ "hyprland-session.target" ];
     };
     Service = {
       Type = "simple";

@@ -14,14 +14,6 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
-    intel-vaapi-driver = prev.intel-vaapi-driver.override {
-     enableHybridCodec = true;
-    };
-    # Discord sucks. Use vesktop lol.
-    # discord = prev.discord.override {
-    #  withOpenASAR = true;
-    #  withVencord = true;
-    # };
     hyprland-flake = inputs.hyprland.packages.${final.system}.hyprland;
     hyprland-plugins = inputs.hyprland-plugins.packages.${final.system};
     nix-vscode-extensions = inputs.nix-vscode-extensions.extensions.${final.system};

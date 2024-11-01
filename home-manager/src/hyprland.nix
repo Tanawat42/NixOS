@@ -6,6 +6,7 @@
 	xdg.portal.extraPortals = with pkgs; [
 		xdg-desktop-portal
 		xdg-desktop-portal-gtk
+		xdg-desktop-portal-kde
 	];
 	wayland.windowManager.hyprland = {
 		enable = true;
@@ -77,7 +78,7 @@
 				"QT_IM_MODULE,fcitx"
 
 				#"WLR_NO_HARDWARE_CURSORS,1"
-				"WLR_DRM_DEVICES,/dev/dri/card1:/dev/dri/card0"
+				#"WLR_DRM_DEVICES,/dev/dri/card1:/dev/dri/card0"
 			];
 			monitor = [
 				", highres, auto, auto"

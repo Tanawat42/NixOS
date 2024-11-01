@@ -187,9 +187,9 @@
 				source = "~/.face";
 				height = 12;
 				padding = {
-					left = 2;
+					left = 4;
 					right = 2;
-					top = 1;
+					top = 2;
 				};
 			};
 			#display = {
@@ -242,7 +242,7 @@
 	};
 	programs.vscode = {
 		enable = true;
-		package = pkgs.unstable.vscodium;
+		# package = pkgs.unstable.vscodium;
 		extensions = (with pkgs.nix-vscode-extensions; [
 			open-vsx.jnoortheen.nix-ide
 			open-vsx.ms-azuretools.vscode-docker
@@ -253,6 +253,10 @@
 			vscode-marketplace.leonardssh.vscord
 		]);
 		userSettings = {
+			# Nixd LSP
+			"nix.enableLanguageServer" = true;
+			"nix.serverPath" = "/run/current-system/sw/bin/nixd";
+			# Newline
 			"editor.renderWhitespace" = "all";
 			"terminal.integrated.enablePersistentSessions" = false;
 		};
